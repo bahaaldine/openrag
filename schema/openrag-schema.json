@@ -1,0 +1,106 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string",
+        "description": "The version of the OpenRAG standard being used."
+      },
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the RAG configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "A brief description of the RAG task."
+          },
+          "author": {
+            "type": "string",
+            "description": "Name of the author of the configuration."
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date",
+            "description": "Creation date in YYYY-MM-DD format."
+          }
+        },
+        "required": ["name", "description", "author", "date_created"]
+      },
+      "retrieval": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the retrieval method."
+              },
+              "version": {
+                "type": "string",
+                "description": "Version of the retrieval method."
+              }
+            },
+            "required": ["name", "version"]
+          },
+          "index": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the index."
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of the index, such as 'text'."
+              }
+            },
+            "required": ["name", "type"]
+          },
+          "query_template": {
+            "type": "string",
+            "description": "Template for the query."
+          },
+          "max_documents": {
+            "type": "integer",
+            "description": "Maximum number of documents to retrieve."
+          }
+          // ... additional retrieval parameters ...
+        },
+        "required": ["method", "index", "query_template", "max_documents"]
+      },
+      "generation": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the generation model."
+              },
+              "version": {
+                "type": "string",
+                "description": "Version of the generation model."
+              },
+              "provider": {
+                "type": "string",
+                "description": "Provider of the generation model."
+              }
+            },
+            "required": ["name", "version", "provider"]
+          },
+          "context_format": {
+            "type": "string",
+            "description": "Format of the context for generation."
+          }
+        },
+        "required": ["model", "context_format"]
+      }
+    },
+    "required": ["version", "metadata", "retrieval", "generation"]
+  }
+  
